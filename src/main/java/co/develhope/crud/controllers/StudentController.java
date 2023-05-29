@@ -21,17 +21,17 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/create")
-    public @ResponseBody Student create(@RequestBody Student student){
+    public @ResponseBody Student createStudent(@RequestBody Student student){
         return studentRepository.save(student);
     }
 
     @GetMapping("/")
-    public @ResponseBody List<Student> getStudents(){
+    public @ResponseBody List<Student> allStudents(){
         return studentRepository.findAll();
     }
 
     @GetMapping("getbyid/{id}")
-    public @ResponseBody  Student getStudentById(@PathVariable long id){
+    public @ResponseBody  Student studentByID(@PathVariable long id){
         Optional<Student> student =  studentRepository.findById(id);
         if(student.isPresent()){
             return student.get();
@@ -41,7 +41,7 @@ public class StudentController {
     }
 
     @PutMapping("updatebyid/{id}")
-    public @ResponseBody Student update(@PathVariable long id, @RequestBody  @NotNull Student student){
+    public @ResponseBody Student changeStudDetails(@PathVariable long id, @RequestBody  @NotNull Student student){
 
         student.setId(id);
         return studentRepository.save(student);
@@ -53,7 +53,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
+    public void removeStud(@PathVariable long id){
         studentRepository.deleteById(id);
     }
 }
