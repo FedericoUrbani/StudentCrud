@@ -20,7 +20,7 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     public @ResponseBody Student createStudent(@RequestBody Student student){
         return studentRepository.save(student);
     }
@@ -30,7 +30,7 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
-    @GetMapping("getbyid/{id}")
+    @GetMapping("/{id}")
     public @ResponseBody  Student studentByID(@PathVariable long id){
         Optional<Student> student =  studentRepository.findById(id);
         if(student.isPresent()){
@@ -40,7 +40,7 @@ public class StudentController {
         }
     }
 
-    @PutMapping("updatebyid/{id}")
+    @PutMapping("/{id}")
     public @ResponseBody Student changeStudDetails(@PathVariable long id, @RequestBody  @NotNull Student student){
 
         student.setId(id);
